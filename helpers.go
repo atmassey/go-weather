@@ -7,7 +7,7 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
-func (c *config) getAPIKey() *config {
+func (c *config) ReadConfig() *config {
 	yamlFile, err := os.ReadFile("prod/config.yml")
 	if err != nil {
 		fmt.Println(err)

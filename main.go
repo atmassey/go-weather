@@ -7,6 +7,6 @@ import (
 func main() {
 	var conf config
 
-	conf.getAPIKey()
+	conf.ReadConfig()
 	fmt.Println(conf.APIKey)
 }
