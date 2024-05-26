@@ -5,8 +5,8 @@ import (
 )
 
 func main() {
-	var c config
+	var conf config
 
-	c.getAPIKey()
-	fmt.Println(c.APIKey)
+	conf.getAPIKey()
+	fmt.Println(conf.APIKey)
 }
