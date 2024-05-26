@@ -2,13 +2,13 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 
 	"gopkg.in/yaml.v2"
 )
 
 func (c *config) getAPIKey() *config {
-	yamlFile, err := ioutil.ReadFile("prod/config.yml")
+	yamlFile, err := os.ReadFile("prod/config.yml")
 	if err != nil {
 		fmt.Println(err)
 	}
