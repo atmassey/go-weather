@@ -30,4 +30,5 @@ func TestWeatherAPI(t *testing.T) {
 
 	w.CurrentByName("Bowling Green")
 	fmt.Println(w.Main.Temp)
+	fmt.Println(w.Main.Humidity)
 }
