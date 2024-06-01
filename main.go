@@ -21,7 +21,7 @@ func main() {
 	}
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "The temperature is %v degrees F", UpdateWeather().Current.Main.Temp)
+		fmt.Fprintf(w, "<html><h1>The temperature is %v degrees F</h1></html>", UpdateWeather().Current.Main.Temp)
 	})
 
 	s.ListenAndServe()
