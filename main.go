@@ -2,11 +2,27 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 )
 
+var conf config
+
 func main() {
-	var conf config
 
 	conf.ReadConfig()
-	fmt.Println(conf.APIKey)
+	err := conf.CheckAPIKey()
+	if err != nil {
+		fmt.Errorf("Error: %v", err)
+	}
+
+	s := &http.Server{
+		Addr:    ":8081",
+		Handler: nil,
+	}
+
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "The temperature is %v degrees F", UpdateWeather().Current.Main.Temp)
+	})
+
+	s.ListenAndServe()
 }
