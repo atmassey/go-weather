@@ -2,16 +2,17 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"testing"
 
 	owm "github.com/briandowns/openweathermap"
+	"github.com/joho/godotenv"
 )
 
 func TestValidAPIKey(t *testing.T) {
-	var conf config
 	var api_key string
-	config := conf.ReadConfig()
-	api_key = config.APIKey
+	godotenv.Load()
+	api_key = os.Getenv("API_KEY")
 
 	err := owm.ValidAPIKey(api_key)
 	if err != nil {
@@ -21,9 +22,13 @@ func TestValidAPIKey(t *testing.T) {
 }
 
 func TestWeatherAPI(t *testing.T) {
-	var conf config
-	config := conf.ReadConfig()
-	w, err := owm.NewCurrent("F", "en", config.APIKey) // fahrenheit (imperial) with Russian output
+	var api_key string
+	err := godotenv.Load()
+	if err != nil {
+		t.Error("Error loading .env file")
+	}
+	api_key = os.Getenv("API_KEY")
+	w, err := owm.NewCurrent("F", "en", api_key) // fahrenheit (imperial) with Russian output
 	if err != nil {
 		t.Errorf("Error: %v", err)
 	}

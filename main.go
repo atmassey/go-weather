@@ -2,17 +2,18 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
+	"os"
 )
 
-var conf config
+var APIKey string
 
 func main() {
 
-	conf.ReadConfig()
-	err := conf.CheckAPIKey()
-	if err != nil {
-		fmt.Errorf("Error: %v", err)
+	APIKey = os.Getenv("API_KEY")
+	if APIKey == "" {
+		log.Fatal("API_KEY environment variable not set")
 	}
 
 	s := &http.Server{
