@@ -1,0 +1,14 @@
+version: '2.26'
+
+services:
+  go-weather:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"
+    env_file:
+      - .env
+    deploy:
+      mode: replicated
+      replicas: 1
