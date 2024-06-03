@@ -13,7 +13,7 @@ test:
 	go test -v ./...
 clean:
 	@echo "Cleaning up..."
-	rmdir /s /q $(DIR_TO_REMOVE)
+	rmdir $(DIR_TO_REMOVE)
 up_build:
 	@echo "Stopping docker images if running"
 	docker-compose down
