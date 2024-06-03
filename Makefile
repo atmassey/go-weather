@@ -6,9 +6,7 @@ run:
 	go run .
 build:
 	@echo "Building the program..."
-	SET GOOS=linux
 	go build -o $(APP)
-	SET GOOS=windows
 	@echo "Build complete"
 test:
 	@echo "Running tests..."
