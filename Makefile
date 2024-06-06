@@ -1,19 +1,14 @@
-DIR_TO_REMOVE := bin
-APP = go-weather
 
 run:
 	@echo "Running the program..."
 	go run .
 build:
 	@echo "Building the program..."
-	go build -o $(APP)
+	go build -o go-weather
 	@echo "Build complete"
 test:
 	@echo "Running tests..."
 	go test -v ./...
-clean:
-	@echo "Cleaning up..."
-	rmdir $(DIR_TO_REMOVE)
 up_build:
 	@echo "Stopping docker images if running"
 	docker-compose down
