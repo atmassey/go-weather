@@ -8,3 +8,11 @@ type Weather struct {
 	Forecast     owm.ForecastWeatherData
 	Coordinates  owm.Coordinates
 }
+
+type WeatherDisplay struct {
+	City        string
+	Temperature float64
+	Condition   string
+	Humidity    int
+	WindSpeed   float64
+}
