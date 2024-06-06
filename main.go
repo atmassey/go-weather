@@ -13,7 +13,7 @@ func main() {
 
 	APIKey = os.Getenv("API_KEY")
 	if APIKey == "" {
-		log.Fatal("API_KEY environment variable not set")
+		log.Panic("API_KEY environment variable not set")
 	}
 
 	s := &http.Server{
