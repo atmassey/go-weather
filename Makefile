@@ -4,6 +4,7 @@ run:
 	go run .
 build:
 	@echo "Building the program..."
+	SET GOOS=windows
 	go build -o go-weather
 	@echo "Build complete"
 test:

@@ -4,6 +4,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"os"
 
 	owm "github.com/briandowns/openweathermap"
 )
@@ -30,7 +31,7 @@ func WeatherHandler(w http.ResponseWriter, r *http.Request) {
 		WindSpeed:   weather_request.Current.Wind.Speed,
 	}
 
-	tmpl, err := template.ParseFiles("web/template.html")
+	tmpl, err := template.ParseFS(os.DirFS("./web"), "template.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
