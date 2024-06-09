@@ -20,7 +20,7 @@ func main() {
 		Handler: nil,
 	}
 
-	http.HandleFunc("/", WeatherHandler)
+	http.HandleFunc("/", CurrentWeatherHandler)
 	log.Println("Server starting on port 8081...")
 	s.ListenAndServe()
 }

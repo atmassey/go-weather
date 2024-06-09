@@ -19,9 +19,9 @@ func CheckAPIKey(apiKey string) error {
 	return nil
 }
 
-func WeatherHandler(w http.ResponseWriter, r *http.Request) {
+func CurrentWeatherHandler(w http.ResponseWriter, r *http.Request) {
 
-	weather_request := UpdateWeather()
+	weather_request := UpdateCurrentWeather()
 
 	weatherData := WeatherDisplay{
 		City:        weather_request.Current.Name,
