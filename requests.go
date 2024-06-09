@@ -11,7 +11,7 @@ func UpdateCurrentWeather() *Weather {
 	if err != nil {
 		fmt.Println(err)
 	}
-	w.CurrentByName("Bowling Green, KY")
+	w.CurrentByName("Bowling Green")
 
 	return &Weather{
 		Current: *w,

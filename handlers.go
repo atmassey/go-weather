@@ -22,6 +22,11 @@ func CheckAPIKey(apiKey string) error {
 func CurrentWeatherHandler(w http.ResponseWriter, r *http.Request) {
 
 	weather_request := UpdateCurrentWeather()
+	// Check if weather data is found
+	if len(weather_request.Current.Weather) == 0 {
+		http.Error(w, "Error: No weather data found", http.StatusInternalServerError)
+		return
+	}
 
 	weatherData := WeatherDisplay{
 		City:        weather_request.Current.Name,
@@ -30,8 +35,9 @@ func CurrentWeatherHandler(w http.ResponseWriter, r *http.Request) {
 		Humidity:    weather_request.Current.Main.Humidity,
 		WindSpeed:   weather_request.Current.Wind.Speed,
 	}
+	log.Printf("Current Weather: %v", weatherData)
 
-	tmpl, err := template.ParseFS(os.DirFS("./web"), "template.html")
+	tmpl, err := template.ParseFS(os.DirFS("./web"), "current_template.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
