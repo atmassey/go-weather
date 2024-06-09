@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 28px;
+            color: #333;
+        }
+        p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        strong {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Weather Forecast for {{.City}}</h1>
+    <ul>
+        {{range .Forecast}}
+        <li>
+            <p><strong>Date:</strong> {{.Date}}</p>
+            <p><strong>Temperature:</strong> {{.Temperature}} °C</p>
+            <p><strong>Condition:</strong> {{.Condition}}</p>
+            <p><strong>Humidity:</strong> {{.Humidity}} %</p>
+            <p><strong>Wind Speed:</strong> {{.WindSpeed}} m/s</p>
+        </li>
+        {{end}}
+    </ul>
+</body>
+</html>

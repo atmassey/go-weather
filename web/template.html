@@ -31,16 +31,34 @@
         strong {
             font-weight: bold;
         }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Current Weather in {{.City}}</h1>
-        <p><strong>Temperature:</strong> {{.Temperature}} °F</p>
+        <p><strong>Temperature:</strong> {{.Temperature}} °C</p>
         <p><strong>Condition:</strong> {{.Condition}}</p>
         <p><strong>Humidity:</strong> {{.Humidity}} %</p>
         <p><strong>Wind Speed:</strong> {{.WindSpeed}} m/s</p>
+        <div class="button-container">
+            <a href="/forecast"><button class="button">View Forecast</button></a>
+        </div>
     </div>
 </body>
 </html>
-

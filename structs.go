@@ -15,3 +15,11 @@ type WeatherDisplay struct {
 	Humidity    int
 	WindSpeed   float64
 }
+
+type ForecastDisplay struct {
+	Date        string
+	Temperature float64
+	Condition   string
+	Humidity    int
+	WindSpeed   float64
+}
