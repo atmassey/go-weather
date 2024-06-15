@@ -18,14 +18,12 @@ func UpdateCurrentWeather() *Weather {
 	}
 }
 
-func UpdateForecast() *Weather {
-	f, err := owm.NewForecast("5", "F", "EN", APIKey)
+func GetForecast5(location, units, lang string, api_key string) (*owm.Forecast5WeatherData, error) {
+	w, err := owm.NewForecast("5", units, lang, api_key)
 	if err != nil {
-		fmt.Println(err)
+		return nil, err
 	}
-	f.DailyByName("Bowling Green, KY", 5)
-
-	return &Weather{
-		Forecast: *f,
-	}
+	w.DailyByName(location, 5)
+	forecast := w.ForecastWeatherJson.(*owm.Forecast5WeatherData)
+	return forecast, err
 }

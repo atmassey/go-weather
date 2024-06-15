@@ -47,3 +47,31 @@ func CurrentWeatherHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }
+
+func WeatherForecastHandler(w http.ResponseWriter, r *http.Request) {
+
+	weather_request := UpdateCurrentWeather()
+	// Check if weather data is found
+	if len(weather_request.Current.Weather) == 0 {
+		http.Error(w, "Error: No weather data found", http.StatusInternalServerError)
+		return
+	}
+
+	weatherData := WeatherDisplay{
+		City:        weather_request.Current.Name,
+		Temperature: weather_request.Current.Main.Temp,
+		Condition:   weather_request.Current.Weather[0].Description,
+		Humidity:    weather_request.Current.Main.Humidity,
+		WindSpeed:   weather_request.Current.Wind.Speed,
+	}
+
+	tmpl, err := template.ParseFS(os.DirFS("./web"), "forecast_template.html")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	if err := tmpl.Execute(w, weatherData); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}

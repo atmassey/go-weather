@@ -31,8 +31,8 @@
         {{range .Forecast}}
         <li>
             <p><strong>Date:</strong> {{.Date}}</p>
-            <p><strong>Temperature:</strong> {{.Temperature}} °C</p>
-            <p><strong>Condition:</strong> {{.Condition}}</p>
+            <p><strong>Temperature:</strong> {{.Main.Temp}} °C</p>
+            <p><strong>Condition:</strong> {{.Description}}</p>
             <p><strong>Humidity:</strong> {{.Humidity}} %</p>
             <p><strong>Wind Speed:</strong> {{.WindSpeed}} m/s</p>
         </li>

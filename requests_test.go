@@ -50,14 +50,12 @@ func TestForecastAPI(t *testing.T) {
 		t.Error("Error loading .env file")
 	}
 	api_key := os.Getenv("API_KEY")
-	f, err := owm.NewForecast("5", "F", "en", api_key)
+	forecast, err := GetForecast5("Bowling Green", "F", "en", api_key)
 	if err != nil {
 		t.Errorf("Error: %v", err)
 	}
-	err = f.DailyByName("Bowling Green, KY", 5)
-	if err != nil {
-		t.Errorf("Error: %v", err)
-	}
+	fmt.Printf("Forecast: %v\n", forecast)
+
 }
 
 func TestUpdateCurrentWeather(t *testing.T) {
