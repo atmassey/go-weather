@@ -28,7 +28,7 @@ jobs:
       run: go build -v ./...
 
   lint:
-    if: github.event_name == 'pull_request'
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
