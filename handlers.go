@@ -72,16 +72,16 @@ func WeatherForecastHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func APIKeyHandler(w http.ResponseWriter, r *http.Request) {
+func DataEntryHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodPost {
 		APIKey = r.FormValue("apikey")
 		log.Printf("API Key received: %s", APIKey)
 
-		http.Redirect(w, r, "/", http.StatusSeeOther)
+		http.Redirect(w, r, "/current", http.StatusSeeOther)
 		return
 	}
 
-	tmpl, err := template.ParseFS(os.DirFS("./web"), "apikey.html")
+	tmpl, err := template.ParseFS(os.DirFS("./web"), "data_entry.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

@@ -16,8 +16,8 @@ func main() {
 		Handler: nil,
 	}
 
-	http.HandleFunc("/", CurrentWeatherHandler)
-	http.HandleFunc("/setapikey", APIKeyHandler)
+	http.HandleFunc("/", DataEntryHandler)
+	http.HandleFunc("/current", CurrentWeatherHandler)
 	http.HandleFunc("/forecast", WeatherForecastHandler)
 	log.Println("Server starting on port 8081...")
 	err = s.ListenAndServe()

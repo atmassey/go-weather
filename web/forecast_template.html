@@ -33,7 +33,7 @@
             <p><strong>Date:</strong> {{range .List}} {{.DtTxt}}</p>
             <p><strong>Condition:</strong>  {{range .Weather}}{{.Main}} {{.Description}}{{end}}</p>
             <p><strong>Temperature High:</strong> {{.Main.TempMax}}</p>
-            <p><strong>Temperature Low:</strong> {{.Main.TempLow}}</p>
+            <p><strong>Temperature Low:</strong> {{.Main.TempMin}}</p>
         </li>
         {{end}}
     </ul>
