@@ -26,15 +26,14 @@
     </style>
 </head>
 <body>
-    <h1>Weather Forecast for {{.City}}</h1>
+    <h1>Weather Forecast for {{.City.Name}}</h1>
     <ul>
-        {{range .Forecast}}
+        
         <li>
-            <p><strong>Date:</strong> {{.Date}}</p>
-            <p><strong>Temperature:</strong> {{.Main.Temp}} °C</p>
-            <p><strong>Condition:</strong> {{.Description}}</p>
-            <p><strong>Humidity:</strong> {{.Humidity}} %</p>
-            <p><strong>Wind Speed:</strong> {{.WindSpeed}} m/s</p>
+            <p><strong>Date:</strong> {{range .List}} {{.DtTxt}}</p>
+            <p><strong>Condition:</strong>  {{range .Weather}}{{.Main}} {{.Description}}{{end}}</p>
+            <p><strong>Temperature High:</strong> {{.Main.TempMax}}</p>
+            <p><strong>Temperature Low:</strong> {{.Main.TempLow}}</p>
         </li>
         {{end}}
     </ul>

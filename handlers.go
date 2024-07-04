@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	owm "github.com/briandowns/openweathermap"
 )
@@ -49,30 +50,25 @@ func CurrentWeatherHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func WeatherForecastHandler(w http.ResponseWriter, r *http.Request) {
+	forecast, err := GetForecast5("Bowling Green", "F", "EN", APIKey)
+	if err != nil {
+		http.Error(w, "Failed to retrieve forecast", http.StatusInternalServerError)
+		return
+	}
 
-	weather_request := UpdateCurrentWeather()
-	// Check if weather data is found
-	if len(weather_request.Current.Weather) == 0 {
+	if forecast == nil || len(forecast.City.Name) == 0 {
 		NoDataHandler(w, r)
 		return
 	}
 
-	weatherData := WeatherDisplay{
-		City:        weather_request.Current.Name,
-		Temperature: weather_request.Current.Main.Temp,
-		Condition:   weather_request.Current.Weather[0].Description,
-		Humidity:    weather_request.Current.Main.Humidity,
-		WindSpeed:   weather_request.Current.Wind.Speed,
-	}
-
 	tmpl, err := template.ParseFS(os.DirFS("./web"), "forecast_template.html")
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, "Failed to parse template", http.StatusInternalServerError)
 		return
 	}
-
-	if err := tmpl.Execute(w, weatherData); err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+	log.Printf("Forecast: %v", forecast)
+	if err := tmpl.Execute(w, forecast); err != nil {
+		http.Error(w, "Failed to execute template", http.StatusInternalServerError)
 	}
 }
 
@@ -106,4 +102,13 @@ func NoDataHandler(w http.ResponseWriter, r *http.Request) {
 	if err := tmpl.Execute(w, nil); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
+}
+
+func formatDate(dateStr string) string {
+	const layout = "2006-01-02 15:04:05"
+	t, err := time.Parse(layout, dateStr)
+	if err != nil {
+		return dateStr
+	}
+	return t.Format("Monday, January 2, 2006")
 }
