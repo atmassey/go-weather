@@ -24,7 +24,7 @@ func CurrentWeatherHandler(w http.ResponseWriter, r *http.Request) {
 	weather_request := UpdateCurrentWeather()
 	// Check if weather data is found
 	if len(weather_request.Current.Weather) == 0 {
-		http.Error(w, "Error: No weather data found", http.StatusInternalServerError)
+		NoDataHandler(w, r)
 		return
 	}
 
@@ -53,7 +53,7 @@ func WeatherForecastHandler(w http.ResponseWriter, r *http.Request) {
 	weather_request := UpdateCurrentWeather()
 	// Check if weather data is found
 	if len(weather_request.Current.Weather) == 0 {
-		http.Error(w, "Error: No weather data found", http.StatusInternalServerError)
+		NoDataHandler(w, r)
 		return
 	}
 
@@ -85,8 +85,19 @@ func APIKeyHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tmplPath := "./web/apikey.html"
-	tmpl, err := template.ParseFiles(tmplPath)
+	tmpl, err := template.ParseFS(os.DirFS("./web"), "apikey.html")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	if err := tmpl.Execute(w, nil); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+func NoDataHandler(w http.ResponseWriter, r *http.Request) {
+	tmpl, err := template.ParseFS(os.DirFS("./web"), "no_data.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
