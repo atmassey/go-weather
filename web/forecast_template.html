@@ -28,12 +28,11 @@
 <body>
     <h1>Weather Forecast for {{.City.Name}}</h1>
     <ul>
-        
         <li>
             <p><strong>Date:</strong> {{range .List}} {{.DtTxt}}</p>
             <p><strong>Condition:</strong>  {{range .Weather}}{{.Main}} {{.Description}}{{end}}</p>
-            <p><strong>Temperature High:</strong> {{.Main.TempMax}}</p>
-            <p><strong>Temperature Low:</strong> {{.Main.TempMin}}</p>
+            <p><strong>Temperature High:</strong> {{.Main.TempMax}} °F</p>
+            <p><strong>Temperature Low:</strong> {{.Main.TempMin}} °F</p>
         </li>
         {{end}}
     </ul>

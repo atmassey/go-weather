@@ -5,7 +5,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"time"
 
 	owm "github.com/briandowns/openweathermap"
 )
@@ -50,7 +49,7 @@ func CurrentWeatherHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func WeatherForecastHandler(w http.ResponseWriter, r *http.Request) {
-	forecast, err := GetForecast5("Bowling Green", "F", "EN", APIKey)
+	forecast, err := GetForecast5(City, Units, "EN", APIKey)
 	if err != nil {
 		http.Error(w, "Failed to retrieve forecast", http.StatusInternalServerError)
 		return
@@ -76,6 +75,8 @@ func DataEntryHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodPost {
 		APIKey = r.FormValue("apikey")
 		log.Printf("API Key received: %s", APIKey)
+		City = r.FormValue("city")
+		Units = r.FormValue("units")
 
 		http.Redirect(w, r, "/current", http.StatusSeeOther)
 		return
@@ -102,13 +103,4 @@ func NoDataHandler(w http.ResponseWriter, r *http.Request) {
 	if err := tmpl.Execute(w, nil); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
-}
-
-func formatDate(dateStr string) string {
-	const layout = "2006-01-02 15:04:05"
-	t, err := time.Parse(layout, dateStr)
-	if err != nil {
-		return dateStr
-	}
-	return t.Format("Monday, January 2, 2006")
 }

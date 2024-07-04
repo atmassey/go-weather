@@ -7,11 +7,11 @@ import (
 )
 
 func UpdateCurrentWeather() *Weather {
-	w, err := owm.NewCurrent("F", "EN", APIKey)
+	w, err := owm.NewCurrent(Units, "EN", APIKey)
 	if err != nil {
 		fmt.Println(err)
 	}
-	w.CurrentByName("Bowling Green")
+	w.CurrentByName(City)
 
 	return &Weather{
 		Current: *w,

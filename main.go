@@ -6,7 +6,8 @@ import (
 )
 
 var APIKey string
-var APIKeyValid bool
+var Units string
+var City string
 
 func main() {
 	var err error
