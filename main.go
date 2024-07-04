@@ -3,22 +3,13 @@ package main
 import (
 	"log"
 	"net/http"
-	"os"
 )
 
 var APIKey string
+var APIKeyValid bool
 
 func main() {
 	var err error
-	APIKey = os.Getenv("API_KEY")
-	if APIKey == "" {
-		log.Panic("API_KEY environment variable not set")
-	}
-
-	err = CheckAPIKey(APIKey)
-	if err != nil {
-		log.Fatalf("Invalid API Key. Error: %v", err)
-	}
 
 	s := &http.Server{
 		Addr:    ":8081",
