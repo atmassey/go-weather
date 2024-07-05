@@ -9,4 +9,4 @@ The Current Weather page displays the current weather for the city entered on th
 ![Current Weather](https://github.com/atmassey/go-weather/blob/main/docs/current_weather.png?raw=true)
 
 The Forecast page displays the 5 day forecast for the city entered on the Data Entry page.
-![Forecast](https://github.com/atmassey/go-weather/blob/main/docs/forecast.png?raw=true)
+![Forecast](https://github.com/atmassey/go-weather/blob/main/docs/forecast_weather.png?raw=true)
