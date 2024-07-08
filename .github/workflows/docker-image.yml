@@ -50,4 +50,4 @@ jobs:
         
         labels: |
           org.opencontainers.image.title=${{ env.IMAGE_NAME }}
-          org.opencontainers.image.description="Docker image for displaying weather informations from OpenWeather API"
+          org.opencontainers.image.description="Docker image for displaying weather information from OpenWeatherMap API"
