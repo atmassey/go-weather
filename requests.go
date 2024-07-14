@@ -27,3 +27,25 @@ func GetForecast5(location, units, lang string, api_key string) (*owm.Forecast5W
 	forecast := w.ForecastWeatherJson.(*owm.Forecast5WeatherData)
 	return forecast, err
 }
+
+func GetForecast5New(location, units, lang string, api_key string) (*ForecastWeather, error) {
+	w, err := owm.NewForecast("5", units, lang, api_key)
+	if err != nil {
+		return nil, err
+	}
+	w.DailyByName(location, 5)
+	forecast := ForecastWeather{}
+	for _, data := range w.ForecastWeatherJson.(*owm.Forecast5WeatherData).List {
+		forecast.Forecast = append(forecast.Forecast, ForecastWeatherData{
+			Description: data.Weather[0].Description,
+			TempMax:     data.Main.TempMax,
+			TempMin:     data.Main.TempMin,
+			Icon:        data.Weather[0].Icon,
+			Condition:   data.Weather[0].Main,
+			Date:        data.DtTxt.Time.Format("2006-01-02 15:04:05"),
+		})
+	}
+	forecast.City = w.ForecastWeatherJson.(*owm.Forecast5WeatherData).City.Name
+	fmt.Printf("Forecast: %v\n", forecast)
+	return &forecast, err
+}

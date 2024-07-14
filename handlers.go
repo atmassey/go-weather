@@ -27,13 +27,13 @@ func CurrentWeatherHandler(w http.ResponseWriter, r *http.Request) {
 		NoDataHandler(w, r)
 		return
 	}
-
 	weatherData := WeatherDisplay{
 		City:        weather_request.Current.Name,
 		Temperature: weather_request.Current.Main.Temp,
 		Condition:   weather_request.Current.Weather[0].Description,
 		Humidity:    weather_request.Current.Main.Humidity,
 		WindSpeed:   weather_request.Current.Wind.Speed,
+		Icon:        weather_request.Current.Weather[0].Icon,
 	}
 	log.Printf("Current Weather: %v", weatherData)
 
@@ -49,13 +49,13 @@ func CurrentWeatherHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func WeatherForecastHandler(w http.ResponseWriter, r *http.Request) {
-	forecast, err := GetForecast5(City, Units, "EN", APIKey)
+	forecast, err := GetForecast5New(City, Units, "EN", APIKey)
 	if err != nil {
 		http.Error(w, "Failed to retrieve forecast", http.StatusInternalServerError)
 		return
 	}
 
-	if forecast == nil || len(forecast.City.Name) == 0 {
+	if forecast == nil || len(forecast.City) == 0 {
 		NoDataHandler(w, r)
 		return
 	}

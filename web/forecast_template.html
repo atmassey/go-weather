@@ -23,6 +23,7 @@
             padding: 20px;
             max-width: 600px;
             width: 100%;
+            text-align: center;
         }
         .button-container {
             text-align: center;
@@ -73,13 +74,16 @@
 </head>
 <body>
     <div class="container">
-        <h1>Weather Forecast for {{.City.Name}}</h1>
+        <h1>Weather Forecast for {{.City}}</h1>
         <ul>
+            {{range .Forecast}}
             <li>
-                <p><strong>Date:</strong>{{range .List}} {{.DtTxt}}</p>
-                <p><strong>Condition:</strong> {{range .Weather}}{{.Main}} {{.Description}}{{end}}</p>
-                <p><strong>Temperature High:</strong> {{.Main.TempMax}} °F</p>
-                <p><strong>Temperature Low:</strong> {{.Main.TempMin}} °F</p>
+                <img src="https://openweathermap.org/img/wn/{{.Icon}}@2x.png" alt = "Weather icon">
+                <p><strong>Date:</strong> {{.Date}}</p>
+                <p><strong>Condition:</strong> {{.Condition}}</p>
+                <p><strong>Description:</strong> {{.Description}}</p>
+                <p><strong>Temperature High:</strong> {{.TempMax}} °F</p>
+                <p><strong>Temperature Low:</strong> {{.TempMin}} °F</p>
             </li>
             {{end}}
         </ul>

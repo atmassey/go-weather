@@ -18,6 +18,7 @@
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
         h1 {
             font-size: 28px;
@@ -51,6 +52,7 @@
 </head>
 <body>
     <div class="container">
+        <img src="https://openweathermap.org/img/wn/{{.Icon}}@2x.png" alt="Weather icon">
         <h1>Current Weather in {{.City}}</h1>
         <p><strong>Temperature:</strong> {{.Temperature}} °F</p>
         <p><strong>Condition:</strong> {{.Condition}}</p>
