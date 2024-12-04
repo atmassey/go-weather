@@ -1,5 +1,9 @@
 # Go-Weather
 
+[![Build](https://github.com/atmassey/go-weather/actions/workflows/build.yml/badge.svg)](https://github.com/atmassey/go-weather/actions/workflows/build.yml)
+[![Docker Image CI](https://github.com/atmassey/go-weather/actions/workflows/docker-image.yml/badge.svg)](https://github.com/atmassey/go-weather/actions/workflows/docker-image.yml)
+[![Lint](https://github.com/atmassey/go-weather/actions/workflows/golangci-lint.yml/badge.svg)](https://github.com/atmassey/go-weather/actions/workflows/golangci-lint.yml)
+
 Go-Weather is a very simple go web app that displays weather metrics.
 
 The data entry page is a form that requires an OpenWeatherMap API key, a City, and Units.
