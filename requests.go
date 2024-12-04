@@ -11,7 +11,10 @@ func UpdateCurrentWeather() *Weather {
 	if err != nil {
 		fmt.Println(err)
 	}
-	w.CurrentByName(City)
+	err = w.CurrentByName(City)
+	if err != nil {
+		fmt.Println(err)
+	}
 
 	return &Weather{
 		Current: *w,
@@ -23,7 +26,10 @@ func GetForecast5(location, units, lang string, api_key string) (*owm.Forecast5W
 	if err != nil {
 		return nil, err
 	}
-	w.DailyByName(location, 5)
+	err = w.DailyByName(location, 5)
+	if err != nil {
+		return nil, err
+	}
 	forecast := w.ForecastWeatherJson.(*owm.Forecast5WeatherData)
 	return forecast, err
 }
@@ -33,7 +39,10 @@ func GetForecast5New(location, units, lang string, api_key string) (*ForecastWea
 	if err != nil {
 		return nil, err
 	}
-	w.DailyByName(location, 5)
+	err = w.DailyByName(location, 5)
+	if err != nil {
+		return nil, err
+	}
 	forecast := ForecastWeather{}
 	for _, data := range w.ForecastWeatherJson.(*owm.Forecast5WeatherData).List {
 		forecast.Forecast = append(forecast.Forecast, ForecastWeatherData{

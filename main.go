@@ -15,6 +15,7 @@ func main() {
 	s := &http.Server{
 		Addr:    ":8081",
 		Handler: nil,
+		ReadHeaderTimeout: time.Second * 10,
 	}
 
 	http.HandleFunc("/", DataEntryHandler)
